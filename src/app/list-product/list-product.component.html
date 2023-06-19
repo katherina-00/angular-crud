@@ -1,0 +1,25 @@
+<p>list-product works!</p>
+<div>
+    <div>
+      <h3>Filtrar por categoria:</h3>
+      <select [(ngModel)]="selectedCategoryId">
+        <option value="">Todas las categorías</option>
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+      </select>
+      <button (click)="filterProductsByCategory()">Filtrar</button>
+    </div>
+  </div>
+  
+  
+  <div class="row">
+    <div class="col-md-3" *ngFor="let product of products">
+      <div class="card mb-3" [routerLink]="['/products', product.id]" style="cursor: pointer;">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.title }}</h5>
+          <p class="card-text">Brand: {{ product.brand }}</p>
+          <p class="card-text">Price: {{ product.price }}</p>
+          <p class="card-text">categoria: {{ product.category?.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
