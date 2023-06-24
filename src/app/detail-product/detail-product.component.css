@@ -1,0 +1,15 @@
+.btn {
+    margin: 1%;
+}
+.col-md-4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn {
+    max-width: 95%;
+}
+.card{
+    background-color: rgba(206, 202, 202, 0.067);
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+}

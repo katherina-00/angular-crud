@@ -1,1 +1,19 @@
-<p>detail-product works!</p>
+<h3>Detalles del producto</h3>
+  <div *ngIf="product" class="card mb-3">
+    <div class="row g-0 justify-content-center">
+      <div class="col-md-4">
+        <img  src="../../assets/card-image.svg" height="200" width="200"  class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+    <div class="card-body">
+      <h5 class="card-title">{{ product.title }}</h5>
+      <p class="card-text">Price: ${{ product.price }}</p>
+      <p class="card-text">Brand: {{ product.brand }}</p>
+      <p class="card-text">Categoria: {{ product.category?.name }}</p>
+      <p class="card-text">Sucursal: {{ product.branch?.name }} ({{ product.branch?.address }})</p>
+    </div>
+  </div>
+    <button class="btn btn-outline-dark" (click)="goToUpdateProduct()">Actualizar</button>
+    <button class="btn btn-outline-dark" (click)="goToDeleteProduct()">Eliminar</button>
+  </div>
+  </div>

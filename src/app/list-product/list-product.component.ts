@@ -9,8 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ListProductComponent implements OnInit {
   products: any[];
+  branches: any = []
   categories: any[] = [];
   selectedCategoryId: number = 0;
+  selectedBranchId: number =0;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,17 +21,19 @@ export class ListProductComponent implements OnInit {
   ) { 
     this.products = [];
     this.categories = [];
+    this.branches = [];
   }
 
   ngOnInit() {
     this.getCategories();
     this.getProducts();
+    this.getBranches();
 
     this.route.params.subscribe(params => {
       const categoryId = params["id"];
-      console.log(categoryId);
-      if (categoryId) {
-        this.filterProductsByCategory();
+      const branchId = params["id"];
+      if (categoryId || branchId) {
+        this.filterProductsBy();
       } else {
         this.getProducts();
       }
@@ -46,7 +50,7 @@ export class ListProductComponent implements OnInit {
       }
     });
   }
-  filterProductsByCategory() {
+  filterProductsBy() {
     if (this.selectedCategoryId) {
       this.productService.filterProductsByCategory(this.selectedCategoryId).subscribe({
         next: (response) => {
@@ -57,7 +61,18 @@ export class ListProductComponent implements OnInit {
           console.error(error);
         }
       });
-    } else {
+    } else if (this.selectedBranchId) {
+      this.productService.filterProductsByBranch(this.selectedBranchId).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.products = response;
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
+    } 
+    else {
       this.getProducts();
     }
   }
@@ -67,6 +82,16 @@ export class ListProductComponent implements OnInit {
     this.productService.getCategory().subscribe({
       next: (categories) => {
         this.categories = categories;
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
+  getBranches(): void {
+    this.productService.getBranches().subscribe({
+      next: (branches) => {
+        this.branches = branches;
       },
       error: (error) => {
         console.error(error);

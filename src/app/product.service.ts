@@ -37,9 +37,17 @@ export class ProductService {
     const url = `http://localhost:8000/categories`;
     return this.http.get<any[]>(url);
   }
+  getBranches(): Observable<any[]> {
+    const url = `http://localhost:8000/branches`;
+    return this.http.get<any[]>(url);
+  }
 
   filterProductsByCategory(categoryId: number) {
-    const url = `http://localhost:8000/productsBy/${categoryId}`;
+    const url = `http://localhost:8000/productsByCategory/${categoryId}`;
     return this.http.get<any[]>(url);
+}
+filterProductsByBranch(branchId: number) {
+  const url = `http://localhost:8000/productsByBranch/${branchId}`;
+  return this.http.get<any[]>(url);
 }
 }
